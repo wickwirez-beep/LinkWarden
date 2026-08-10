@@ -1,0 +1,12 @@
+*.iml
+.gradle/
+build/
+local.properties
+.idea/
+*.apk
+*.aab
+.DS_Store
+captures/
+gradlew
+gradlew.bat
+gradle/wrapper/
