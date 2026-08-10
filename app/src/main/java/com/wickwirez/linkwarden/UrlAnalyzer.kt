@@ -41,7 +41,8 @@ object UrlAnalyzer {
         var current = normalized
         var finalUrl = normalized
 
-        repeat(10) {
+        for (i in 0 until 10) {
+            var redirected = false
             try {
                 val request = Request.Builder().url(current).head().build()
                 val response = client.newCall(request).execute()
@@ -53,13 +54,14 @@ object UrlAnalyzer {
                     hops.add(resolved)
                     current = resolved
                     finalUrl = resolved
+                    redirected = true
                 } else {
                     finalUrl = current
-                    return@repeat
                 }
             } catch (e: Exception) {
                 finalUrl = current
             }
+            if (!redirected) break
         }
 
         val reasons = mutableListOf<String>()
